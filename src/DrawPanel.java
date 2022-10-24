@@ -16,6 +16,7 @@ public class DrawPanel extends JPanel implements MouseListener {
         addMouseListener(this);
         list = new ArrayList<Point>();
         setBackground(Color.GRAY);
+        repaint();
     }
 
     public void paintComponent (Graphics g){
