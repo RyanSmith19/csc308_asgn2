@@ -35,6 +35,8 @@ public class DrawPanel extends JPanel implements MouseListener {
     public void mouseReleased(MouseEvent e){
         list.add(new Point(x, y, color));
         repaint();
+        Line line = new Line();
+        line.getLines(list);
     }
 
 
