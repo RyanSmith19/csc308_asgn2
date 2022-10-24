@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 import java.util.Stack;
 
 public class Main extends JFrame implements ActionListener {
-    private JComboBox list;
-    private ButtonGroup group;
     private JPanel centerPanel;
 
     public static void main(String[] args) {
@@ -23,11 +21,16 @@ public class Main extends JFrame implements ActionListener {
 
         JPanel westPanel = new JPanel();
         westPanel.setBackground(Color.LIGHT_GRAY);
+        westPanel.setPreferredSize(new Dimension(100,500));
+
         JButton b1 = new JButton("Run");
+        JCheckBox cluster = new JCheckBox("Cluster");
+        JCheckBox line = new JCheckBox("Line");
+        westPanel.add(cluster);
+        westPanel.add(line);
         westPanel.add(b1);
 
         centerPanel = new DrawPanel();
-        centerPanel.setBackground(Color.GRAY);
 
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
@@ -36,11 +39,12 @@ public class Main extends JFrame implements ActionListener {
 
         ((DrawPanel)centerPanel).setColor(Color.BLACK);
 
-        list.addActionListener(this);
+        cluster.addActionListener(this);
+        line.addActionListener(this);
         b1.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e){
-
+        System.out.println("hi :)");
     }
 }
