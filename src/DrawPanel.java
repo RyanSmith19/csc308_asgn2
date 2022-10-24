@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class DrawPanel extends JPanel implements MouseListener {
-    private int x1, y1;
+    private int x, y;
     private Color color;
 
     public ArrayList<Point> list;
@@ -15,23 +15,25 @@ public class DrawPanel extends JPanel implements MouseListener {
     public DrawPanel(){
         addMouseListener(this);
         list = new ArrayList<Point>();
+        setBackground(Color.GRAY);
     }
 
     public void paintComponent (Graphics g){
         if(list!=null){
-            for (int i =0; i< list.size(); i++){
-                list.get(i);
+            for (Point p: list){
+                p.drawPoint(g);
             }
         }
     }
 
     public void mousePressed(MouseEvent e){
-        x1 = e.getX();
-        y1 = e.getY();
+        x = e.getX();
+        y = e.getY();
     }
 
     public void mouseReleased(MouseEvent e){
-
+        list.add(new Point(x, y, color));
+        repaint();
     }
 
 

@@ -10,6 +10,10 @@ public class Point {
         this.c = c;
     }
 
+    public void drawPoint(Graphics g){
+        g.fillOval(x,y,5,5);
+    }
+
     public Color getC() {
         return c;
     }
