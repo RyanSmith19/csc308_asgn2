@@ -8,6 +8,8 @@ import java.util.Stack;
 
 public class Main extends JFrame implements ActionListener {
     private JPanel centerPanel;
+    private JCheckBox cluster;
+    private JCheckBox line;
 
     public static void main(String[] args) {
         Main main = new Main();
@@ -24,8 +26,8 @@ public class Main extends JFrame implements ActionListener {
         westPanel.setPreferredSize(new Dimension(100,500));
 
         JButton b1 = new JButton("Run");
-        JCheckBox cluster = new JCheckBox("Cluster");
-        JCheckBox line = new JCheckBox("Line");
+        cluster = new JCheckBox("Cluster");
+        line = new JCheckBox("Line");
         westPanel.add(cluster);
         westPanel.add(line);
         westPanel.add(b1);
@@ -45,6 +47,13 @@ public class Main extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
-        System.out.println("hi :)");
+        if(e.getActionCommand().equals("Run")){
+            if(cluster.isSelected()){
+                System.out.println("cluster");
+            }
+            if(line.isSelected()){
+                System.out.println("line");
+            }
+        }
     }
 }
