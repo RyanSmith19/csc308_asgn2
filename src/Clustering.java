@@ -2,86 +2,94 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Clustering {
-    private int x,j,k =2;
-    private ArrayList<int[]> cluster1;
-    private ArrayList<int[]> cluster2;
-    float mean1[][] = new float[1][2];
-    float mean2[][] = new float[1][2];
-    float temp1[][] = new float[1][2];
-    float temp2[][] = new float[1][2];
-    int sum11 = 0, sum12 = 0, sum21 = 0, sum22 = 0;
-    double dist1, dist2;
-    int i1 = 0, i2 = 0, itr = 0;
 
-    public Clustering(){
-        cluster1 = new ArrayList<>();
-        cluster2 = new ArrayList<>();
 
-        mean1[0][0] = 18;
-        mean1[0][1] = 10;
-        mean2[0][0] = 20;
-        mean2[0][1] = 80;
+
+
+    public void initData(){
+
     }
 
-    public void resetCluster(){
-        /*while(!Arrays.deepEquals(mean1, temp1) || !Arrays.deepEquals(mean2, temp2)) {
-
-            //Empty the partitions
-            for(x=0;x<cluster1.size();x++) {
-                cluster1.get(x)[0] = 0;
-                cluster1.get(x)[1] = 0;
-                cluster2.get(x)[0] = 0;
-                cluster2.get(x)[1] = 0;
-            }
-
-            i1 = 0; i2 = 0;
-
-            //Find the distance between mean and the data point and store it in its corresponding partition
-            for(x=0;x<10;x++) {
-                dist1 = Math.sqrt(Math.pow(res[x][0] - mean1[0][0],2) + Math.pow(res[x][1] - mean1[0][1],2));
-                dist2 = Math.sqrt(Math.pow(res[x][0] - mean2[0][0],2) + Math.pow(res[x][1] - mean2[0][1],2));
-
-                if(dist1 < dist2) {
-                    cluster1.get(i1)[0] = res[x][0];
-                    cluster1.get(i1)[1] = res[x][1];
-
-                    i1++;
-                }
-                else {
-                    cluster2.get(i2)[0] = res[x][0];
-                    cluster2.get(i2)[1] = res[x][1];
-
-                    i2++;
-                }
-            }
-
-
-            temp1[0][0] = mean1[0][0];
-            temp1[0][1] = mean1[0][1];
-            temp2[0][0] = mean2[0][0];
-            temp2[0][1] = mean2[0][1];
-
-            //Find the new mean for new partitions
-            sum11 = 0; sum12 = 0; sum21 = 0; sum22 = 0;
-
-            for(x=0;x<i1;x++) {
-                sum11 += cluster1.get(x)[0];
-                sum12 += cluster1.get(x)[1];
-            }
-            for(x=0;x<i2;x++) {
-                sum21 += cluster2.get(x)[0];
-                sum22 += cluster2.get(x)[1];
-            }
-            mean1[0][0] = (float)sum11/i1;
-            mean1[0][1] = (float)sum12/i1;
-            mean2[0][0] = (float)sum21/i2;
-            mean2[0][1] = (float)sum22/i2;
-
-            itr++;
+    private double[][] findColMinMax(ArrayList<Double[]> items){
+        int n = items.get(0).length;
+        double min[] = new double[n];
+        double max[] = new double[n];
+        for(int i = 0; i < n; i++){
+            min[i] = Double.MAX_VALUE;
+            max[i] = Double.MIN_VALUE;
         }
-        */
+
+        for(int i = 0; i < items.size(); i++){
+            for(int j = 0; j < items.get(i).length; j++){
+                if(items.get(i)[j] < min[j]){
+                    min[j] = items.get(i)[j];
+                }
+                if(items.get(i)[j] > min[j]){
+                    max[j] = items.get(i)[j];
+                }
+            }
+        }
+        double result[][] = new double[2][min.length];
+        result[0] = min;
+        result[1] = max;
+        return result;
     }
 
+    private double[][] initMeans(ArrayList<Double[]> items, double[] cMin, double[] cMax){
+        double[][] means = new double[items.get(0).length][2];
+        for( int i = 0; i < means.length; i++){
+            for (int j = 0; j < means[i].length; j++){
+                means[i][j] = Math.random()*(cMax[j]-1-cMin[j]+1)+cMin[j]+1;
+            }
+        }
+        return means;
+    }
 
+    private double[] updateMean(int n, double[] mean, double[] item){
+        double m = mean[0];
+        for(int i = 0; i < mean.length; i++){
+            m = (mean[i]*(n-1)+item[i])/((double) n);
+            mean[i] = (double) Math.round(m * 1000d)/1000d;
+        }
+        return mean;
+    }
+
+    private double euclideanDistance(double[] x, double[] y){
+        double sum = 0.0;
+        for(int i = 0; i < x.length; i++){
+            sum += Math.pow(x[i]-y[i], 2);
+        }
+        return sum;
+    }
+
+    private int classify(double[][] means, double[] item){
+        double min = Double.MIN_VALUE;
+        int idx = -1;
+        double dis;
+        for(int i = 0; i < means.length; i++){
+            dis = euclideanDistance(item, means[i]);
+            if(dis < min){
+                min = dis;
+                idx = i;
+            }
+        }
+        return idx;
+    }
+
+    private double[][] calculateMeans(ArrayList<Double[]> items){
+        int maxIter = 100000;
+        double[][] colMinMax = findColMinMax(items);
+        double[] cMin = colMinMax[0];
+        double[] cMax = colMinMax[1];
+        // double[] means = initMeans(items, cMin, cMax);
+
+        double[] clusterSizes = new double[1];
+        return colMinMax;
+
+    }
+
+    // private ArrayList<Double[]> findClusters(double[][] means, ArrayList<Double[]> items){
+        // ArrayList<Double[]> clusters
+    // }
 
 }
