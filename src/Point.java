@@ -11,6 +11,7 @@ public class Point {
     }
 
     public void drawPoint(Graphics g){
+        g.setColor(c);
         g.fillOval(x,y,5,5);
     }
 

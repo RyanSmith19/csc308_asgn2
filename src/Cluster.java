@@ -33,62 +33,45 @@ public class Cluster {
     private double[][] minmaxlens = null;
     private DoubleClusterExt cluster = null;
 
-    public Cluster(){}
+
     public Cluster(double[][] points) {
         this.points = points;
+        minmaxlens = new double[][]{
+                {Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY},
+                {Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY},
+                {0d, 0d}
+        };
 
-    }
-
-    private void paint(Graphics g, int width, int height) {
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, width, height);
-        if (minmaxlens == null) {
-            return;
-        }
-        double widthRatio = (width - 6d) / minmaxlens[LEN][X];
-        double heightRatio = (height - 6d) / minmaxlens[LEN][Y];
-        if (points == null) {
-            return;
-        }
-        g.setColor(Color.BLACK);
-        for (int i = 0; i < points.length; i++) {
-            int px = 3 + (int) (widthRatio * (points[i][X] - minmaxlens[MIN][X]));
-            int py = 3 + (int) (heightRatio * (points[i][Y] - minmaxlens[MIN][Y]));
-            g.drawRect(px - 2, py - 2, 4, 4);
-        }
-        if (cluster == null) {
-            return;
-        }
-        int[] assignments = cluster.getAssignments();
-        int[] counts = cluster.getCounts();
-        int s = 225 / centroids.length;
-        for (int i = 0; i < points.length; i++) {
-            int assignment = assignments[i];
-            if (assignment == -1) {
-                continue;
+        for(double[] p: points){
+            if (p[X] < minmaxlens[MIN][X]) {
+                minmaxlens[MIN][X] = p[X];
             }
-            int cx = 3 + (int) (widthRatio * (centroids[assignment][X] - minmaxlens[MIN][X]));
-            int cy = 3 + (int) (heightRatio * (centroids[assignment][Y] - minmaxlens[MIN][Y]));
-            int px = 3 + (int) (widthRatio * (points[i][X] - minmaxlens[MIN][X]));
-            int py = 3 + (int) (heightRatio * (points[i][Y] - minmaxlens[MIN][Y]));
-            int c = assignment * s;
-            g.setColor(new Color(c, c, c));
-            g.drawLine(cx, cy, px, py);
+            if (p[Y] < minmaxlens[MIN][Y]) {
+                minmaxlens[MIN][Y] = p[Y];
+            }
+            if (p[X] > minmaxlens[MAX][X]) {
+                minmaxlens[MAX][X] = p[X];
+            }
+            if (p[Y] > minmaxlens[MAX][Y]) {
+                minmaxlens[MAX][Y] = p[Y];
+            }
         }
-        g.setColor(Color.GREEN);
-        for (int i = 0; i < centroids.length; i++) {
-            int cx = 3 + (int) (widthRatio * (centroids[i][X] - minmaxlens[MIN][X]));
-            int cy = 3 + (int) (heightRatio * (centroids[i][Y] - minmaxlens[MIN][Y]));
-            g.drawLine(cx, cy - 2, cx, cy + 2);
-            g.drawLine(cx - 2, cy, cx + 2, cy);
-            int count = counts[i];
-            g.drawString(String.valueOf(count), cx, cy);
+        minmaxlens[LEN][X] = minmaxlens[MAX][X] - minmaxlens[MIN][X];
+        minmaxlens[LEN][Y] = minmaxlens[MAX][Y] - minmaxlens[MIN][Y];
+        centroids = new double[K][2];
+        for (int i = 0; i < K; i++) {
+            centroids[i][X] = minmaxlens[MIN][X] + (minmaxlens[LEN][X] / 2d);
+            centroids[i][Y] = minmaxlens[MIN][Y] + (minmaxlens[LEN][Y] / 2d);
+        }
+        cluster = new DoubleClusterExt(centroids, points, DoubleCluster.EUCLIDEAN_DISTANCE_FUNCTION);
+        int move = cluster.makeAssignments();
+        while(move != 0){
+            move = cluster.remakeAssignments(move);
         }
     }
 
-    public int[] getAssignments(){
+    public int[] getAssignments2(){
         return cluster.getAssignments();
     }
-
 
 }

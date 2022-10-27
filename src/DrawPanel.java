@@ -45,7 +45,7 @@ public class DrawPanel extends JPanel implements MouseListener {
     }
 
     public void mouseReleased(MouseEvent e){
-        list.add(new Point(x, y, color));
+        list.add(new Point(x, y, Color.BLACK));
         repaint();
     }
 
@@ -63,10 +63,16 @@ public class DrawPanel extends JPanel implements MouseListener {
                 points[i][Y] = list.get(i).getY();
             }
             cluster = new Cluster(points);
-            cluster.getAssignments();
-
+            int[] assignments = cluster.getAssignments2();
+            for (int i = 0; i <points.length; i++){
+                if(assignments[i] == 0){
+                    list.get(i).setC(Color.BLUE);
+                } else if (assignments[i] == 1) {
+                    list.get(i).setC(Color.orange);
+                }
+            }
         }
-
+        repaint();
     }
 
     public void mouseClicked(MouseEvent e) {}

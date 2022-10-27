@@ -39,7 +39,7 @@ public class Main extends JFrame implements ActionListener {
         setLayout(layout);
         add(westPanel, BorderLayout.WEST);
         add(centerPanel, BorderLayout.CENTER);
-        
+
 
         cluster.addActionListener(this);
         line.addActionListener(this);
