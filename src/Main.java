@@ -53,6 +53,7 @@ public class Main extends JFrame implements ActionListener {
             }
             if(line.isSelected()){
                 System.out.println("line");
+                ((DrawPanel)centerPanel).drawLine();
             }
         }
     }

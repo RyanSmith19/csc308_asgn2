@@ -11,6 +11,7 @@ public class DrawPanel extends JPanel implements MouseListener {
     private Color color;
 
     public ArrayList<Point> list;
+    public ArrayList<Edge> lines;
 
     public DrawPanel(){
         addMouseListener(this);
@@ -25,6 +26,12 @@ public class DrawPanel extends JPanel implements MouseListener {
                 p.drawPoint(g);
             }
         }
+
+        if(lines!=null){
+            for (Edge e: lines){
+                e.drawEdge(g);
+            }
+        }
     }
 
     public void mousePressed(MouseEvent e){
@@ -35,10 +42,13 @@ public class DrawPanel extends JPanel implements MouseListener {
     public void mouseReleased(MouseEvent e){
         list.add(new Point(x, y, color));
         repaint();
-        Line line = new Line();
-        line.getLines(list);
     }
 
+    public void drawLine() {
+        Line line = new Line();
+        lines = line.getLines(list);
+        repaint();
+    }
 
     public void mouseClicked(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
