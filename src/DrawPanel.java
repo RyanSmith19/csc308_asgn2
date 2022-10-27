@@ -8,10 +8,15 @@ import java.util.Stack;
 
 public class DrawPanel extends JPanel implements MouseListener {
     private int x, y;
-    private Color color;
+
+    private double[][] points = null;
+
+    private static final int X = 0;
+    private static final int Y = 1;
 
     public ArrayList<Point> list;
     public ArrayList<Edge> lines;
+    public Cluster cluster;
 
     public DrawPanel(){
         addMouseListener(this);
@@ -21,15 +26,15 @@ public class DrawPanel extends JPanel implements MouseListener {
     }
 
     public void paintComponent (Graphics g){
-        if(list!=null){
-            for (Point p: list){
-                p.drawPoint(g);
-            }
-        }
-
         if(lines!=null){
             for (Edge e: lines){
                 e.drawEdge(g);
+            }
+        }
+
+        if(list!=null){
+            for (Point p: list){
+                p.drawPoint(g);
             }
         }
     }
@@ -44,14 +49,24 @@ public class DrawPanel extends JPanel implements MouseListener {
         repaint();
     }
 
-    public void recreateCluster(){
-
-    }
-
     public void drawLine() {
         Line line = new Line();
         lines = line.getLines(list);
         repaint();
+    }
+
+    public void orderCluster(){
+        if(list!=null){
+            points = new double[list.size()][2];
+            for (int i = 0; i < list.size(); i++){
+                points[i][X] = list.get(i).getX();
+                points[i][Y] = list.get(i).getY();
+            }
+            cluster = new Cluster(points);
+            cluster.getAssignments();
+
+        }
+
     }
 
     public void mouseClicked(MouseEvent e) {}
@@ -60,7 +75,4 @@ public class DrawPanel extends JPanel implements MouseListener {
     public void mouseDragged(MouseEvent e) {}
     public void mouseMoved(MouseEvent e) {}
 
-    public void setColor(Color color) {
-        this.color = color;
-    }
 }

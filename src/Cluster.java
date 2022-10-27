@@ -90,8 +90,5 @@ public class Cluster {
         return cluster.getAssignments();
     }
 
-    public static void main(String[] args){
-        new Cluster();
-    }
 
 }

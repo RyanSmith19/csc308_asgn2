@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.Stack;
 
 public class Main extends JFrame implements ActionListener {
-    private JPanel centerPanel;
+    private DrawPanel centerPanel;
     private JCheckBox cluster;
     private JCheckBox line;
 
@@ -39,8 +39,7 @@ public class Main extends JFrame implements ActionListener {
         setLayout(layout);
         add(westPanel, BorderLayout.WEST);
         add(centerPanel, BorderLayout.CENTER);
-
-        ((DrawPanel)centerPanel).setColor(Color.BLACK);
+        
 
         cluster.addActionListener(this);
         line.addActionListener(this);
@@ -50,11 +49,12 @@ public class Main extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e){
         if(e.getActionCommand().equals("Run")){
             if(cluster.isSelected()){
+                centerPanel.orderCluster();
                 System.out.println("cluster");
             }
             if(line.isSelected()){
                 System.out.println("line");
-                ((DrawPanel)centerPanel).drawLine();
+                centerPanel.drawLine();
             }
         }
     }
