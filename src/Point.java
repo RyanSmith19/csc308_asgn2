@@ -1,5 +1,12 @@
 import java.awt.*;
 
+/**
+ * Our own Point class implementation so that the point has a Color instance
+ *
+ * @author Ryan Smith
+ * @author Tahsin Amio
+ * @author Iliya Dehsarvi
+ */
 public class Point {
     private int x, y;
     private Color c;

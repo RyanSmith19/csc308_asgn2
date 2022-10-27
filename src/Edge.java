@@ -1,5 +1,12 @@
 import java.awt.*;
 
+/**
+ * Edge contains two points so that they can be stored and drawn easily
+ *
+ * @author Ryan Smith
+ * @author Tahsin Amio
+ * @author Iliya Dehsarvi
+ */
 public class Edge {
       Point first;
       Point second;

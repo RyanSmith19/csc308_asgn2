@@ -3,6 +3,14 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The line class constructs the edges between points
+ * NearestNeighbor is implemented
+ *
+ * @author Ryan Smith
+ * @author Tahsin Amio
+ * @author Iliya Dehsarvi
+ */
 public class Line extends JPanel {
     private ArrayList<Edge> res;
 

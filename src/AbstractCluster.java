@@ -1,6 +1,15 @@
 
 import java.util.Arrays;
 
+/**
+ * Abstract Cluster is contains most the functions needed to assign
+ * points to different clusters
+ * k means is the algorithm implemented
+ *
+ * @author Ryan Smith
+ * @author Tahsin Amio
+ * @author Iliya Dehsarvi
+ */
 public class AbstractCluster<Centroid, Point> {
 
 

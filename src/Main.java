@@ -6,6 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Stack;
 
+/**
+ * The main class that constructs the frame and the action events
+ *
+ * @author Ryan Smith
+ * @author Tahsin Amio
+ * @author Iliya Dehsarvi
+ */
 public class Main extends JFrame implements ActionListener {
     private DrawPanel centerPanel;
     private JCheckBox cluster;

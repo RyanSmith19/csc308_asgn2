@@ -1,5 +1,13 @@
 import java.util.Arrays;
 
+/**
+ * DoubleCluster allows for multiple implementations of the distance
+ * functions to be used for calculating clusters
+ *
+ * @author Ryan Smith
+ * @author Tahsin Amio
+ * @author Iliya Dehsarvi
+ */
 public class DoubleCluster extends AbstractCluster<double[], double[]> {
 
     public interface DoubleDistanceFunction {

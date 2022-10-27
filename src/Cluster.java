@@ -1,7 +1,11 @@
 
-import java.awt.*;
-
-
+/**
+ * Cluster takes in the set of points and arranges the assignments
+ *
+ * @author Ryan Smith
+ * @author Tahsin Amio
+ * @author Iliya Dehsarvi
+ */
 public class Cluster {
 
     private class DoubleClusterExt extends DoubleCluster {
@@ -12,10 +16,6 @@ public class Cluster {
 
         public int[] getAssignments() {
             return assignments;
-        }
-
-        public int[] getCounts() {
-            return counts;
         }
     }
 
