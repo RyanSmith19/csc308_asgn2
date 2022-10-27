@@ -16,7 +16,7 @@ public class DrawPanel extends JPanel implements MouseListener {
 
     public ArrayList<Point> list;
     public ArrayList<Edge> lines;
-    public Cluster cluster;
+    private Cluster cluster;
 
     public DrawPanel(){
         addMouseListener(this);
