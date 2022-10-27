@@ -44,15 +44,14 @@ public class DrawPanel extends JPanel implements MouseListener {
         repaint();
     }
 
-<<<<<<< HEAD
     public void recreateCluster(){
 
-=======
+    }
+
     public void drawLine() {
         Line line = new Line();
         lines = line.getLines(list);
         repaint();
->>>>>>> main
     }
 
     public void mouseClicked(MouseEvent e) {}

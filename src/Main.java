@@ -33,6 +33,7 @@ public class Main extends JFrame implements ActionListener {
         westPanel.add(b1);
 
         centerPanel = new DrawPanel();
+        centerPanel.setBackground(Color.GRAY);
 
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
