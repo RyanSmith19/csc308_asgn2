@@ -27,7 +27,7 @@ public class Main extends JFrame implements ActionListener {
 
         JButton b1 = new JButton("Run");
         cluster = new JCheckBox("Cluster");
-        line = new JCheckBox("Line");
+        line = new JCheckBox("Line     ");
         westPanel.add(cluster);
         westPanel.add(line);
         westPanel.add(b1);
