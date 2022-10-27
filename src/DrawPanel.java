@@ -6,6 +6,14 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Stack;
 
+/**
+ * This class is the panel that allows points to be made
+ * This class controls the paint component
+ *
+ * @author Ryan Smith
+ * @author Tahsin Amio
+ * @author Iliya Dehsarvi
+ */
 public class DrawPanel extends JPanel implements MouseListener {
     private int x, y;
 
