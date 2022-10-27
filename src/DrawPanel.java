@@ -37,6 +37,9 @@ public class DrawPanel extends JPanel implements MouseListener {
         repaint();
     }
 
+    public void recreateCluster(){
+
+    }
 
     public void mouseClicked(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
